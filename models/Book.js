@@ -33,12 +33,10 @@ const bookSchema = new mongoose.Schema({
     versionKey: false // Loại bỏ __v field
 });
 
-// Index cho tìm kiếm nhanh
-bookSchema.index({ isbn: 1 });
+// Index cho tìm kiếm nhanh (isbn index is automatically created by unique: true)
 bookSchema.index({ category: 1 });
 bookSchema.index({ author: 1 });
 bookSchema.index({ year: 1 });
-
 // Virtual để format timestamp
 bookSchema.virtual('createdAtFormatted').get(function() {
     return this.createdAt.toISOString();

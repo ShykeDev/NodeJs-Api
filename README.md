@@ -1,14 +1,115 @@
-# Books API with MongoDB
+# Books API with Dynamic Role-Based Access Control
 
-REST API để quản lý sách với MongoDB, được xây dựng bằng Node.js, Express.js và Mongoose.
+A comprehensive REST API for managing books with dynamic role-based permission system, built with Node.js, Express, MongoDB, and JWT authentication.
 
-## 🚀 Tính năng
+## Features
 
-- ✅ CRUD operations cho sách (Create, Read, Update, Delete)
-- ✅ Phân trang (Pagination) 
-- ✅ Tìm kiếm theo danh mục
-- ✅ Sắp xếp theo tiêu đề hoặc năm xuất bản
-- ✅ Lọc theo tác giả và/hoặc năm
+- **CRUD Operations** for books (Create, Read, Update, Delete)
+- **User Management** with authentication and authorization
+- **Dynamic Role-Based Access Control** with granular permissions
+- **Search, Filter, and Sort** functionality for books
+- **Statistics** and analytics
+- **JWT Authentication** for secure API access
+- **Swagger Documentation** for API exploration
+- **MongoDB** for data persistence
+
+## Quick Start
+
+### Prerequisites
+
+- Node.js (v14 or higher)
+- MongoDB (local or cloud instance)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Configure environment variables in `.env` file
+4. Start the server:
+```bash
+npm start
+```
+
+The server will start on `http://localhost:3000`
+
+## Authentication
+
+### Default Admin Account
+- **Email**: `admin@example.com`
+- **Password**: `admin123`
+
+### Login Process
+1. Send POST request to `/auth/login` with email and password
+2. Receive JWT token in response
+3. Include token in Authorization header: `Bearer <token>`
+
+## Roles and Permissions
+
+### Default Roles
+
+1. **SUPER_ADMIN** - Full system access
+2. **ADMIN** - Management access to books and users
+3. **MANAGER** - Books and users management
+4. **LIBRARIAN** - Books management (Create, Read, Update)
+5. **USER** - Read-only access to books
+
+### Permission System
+
+Permissions are based on **Resource** and **Action**:
+
+#### Resources:
+- `BOOKS` - Book management
+- `USERS` - User management
+- `ROLES` - Role management
+- `PERMISSIONS` - Permission management
+
+#### Actions:
+- `READ` - View resources
+- `CREATE` - Create new resources
+- `UPDATE` - Modify existing resources
+- `DELETE` - Remove resources
+- `MANAGE` - Full access (all actions)
+
+## API Endpoints
+
+### Authentication
+- `POST /auth/login` - User login
+- `POST /auth/register` - Register new user (Admin only)
+- `GET /auth/profile` - Get current user profile
+
+### Books Management
+- `GET /books` - Get books with pagination
+- `GET /books/:isbn` - Get book by ISBN
+- `POST /books` - Create new book
+- `PUT /books/:isbn` - Update book
+- `DELETE /books/:isbn` - Delete book
+- `GET /books/search?category=` - Search books by category
+- `GET /books/sort?by=title&order=asc` - Sort books
+- `GET /books/filter?author=&year=` - Filter books
+- `GET /stats` - Get collection statistics
+
+### User Management
+- `GET /users` - Get all users (Admin only)
+- `PUT /users/:id` - Update user roles (Admin only)
+- `DELETE /users/:id` - Delete user (Admin only)
+
+### Role Management
+- `GET /roles` - Get all roles
+- `POST /roles` - Create new role
+- `PUT /roles/:id` - Update role
+- `DELETE /roles/:id` - Delete role
+
+### Permissions
+- `GET /permissions` - Get all permissions
+
+## API Documentation
+
+Swagger documentation is available at: `http://localhost:3000/api-docs`
 - ✅ Thống kê collection sách
 - ✅ Swagger API Documentation
 - ✅ MongoDB với Mongoose ODM
